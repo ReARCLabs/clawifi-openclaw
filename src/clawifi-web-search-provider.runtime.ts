@@ -151,8 +151,10 @@ export async function executeClawifiSearch(
     language: language.value,
   };
   const ignoredFilters = ignoredKeylessFilters(input);
+  // Only when the caller asked for more than a keyless search returns: a default-count search carries no notice.
+  const askedBeyondKeyless = !apiKey && resolveSearchCount(args.count, 1) > CLAWIFI_KEYLESS_MAX_RESULTS;
 
-  // Keyless answers never depend on count above 3 or on filters, so they share one cache entry per query.
+  // Keyless results never depend on count above 3 or on filters; only the notice does, so that is what the key carries.
   const cacheKey = buildSearchCacheKey([
     "clawifi",
     apiKey ? `keyed-${createHash("sha256").update(apiKey).digest("hex").slice(0, 16)}` : "keyless",
@@ -160,7 +162,7 @@ export async function executeClawifiSearch(
     JSON.stringify(
       apiKey
         ? [timeRange, input.includeDomains, input.excludeDomains, input.country, input.language]
-        : ignoredFilters,
+        : [ignoredFilters, askedBeyondKeyless],
     ),
     query,
   ]);
@@ -188,8 +190,7 @@ export async function executeClawifiSearch(
 
   const notices: string[] = [];
   if (outcome.mode === "keyless") {
-    // Only when the caller asked for more: a default-count search carries no notice.
-    if (resolveSearchCount(args.count, 1) > CLAWIFI_KEYLESS_MAX_RESULTS) {
+    if (askedBeyondKeyless) {
       notices.push(`Without an API key Clawifi returns at most ${CLAWIFI_KEYLESS_MAX_RESULTS} results.`);
     }
     if (ignoredFilters.length > 0) {
