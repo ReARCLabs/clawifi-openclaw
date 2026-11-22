@@ -1,0 +1,67 @@
+{
+  "name": "@clawifi/openclaw-search",
+  "version": "0.1.0",
+  "description": "Clawifi web search provider plugin for OpenClaw. Works without an API key; a free key adds filters and more results.",
+  "license": "MIT",
+  "author": "ReARC Labs Inc.",
+  "homepage": "https://clawifi.dev/?utm_source=openclaw&utm_medium=integration&utm_campaign=clawhub-plugin",
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "web-search",
+    "search-provider",
+    "clawifi"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "assets",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:live": "CLAWIFI_LIVE=1 vitest run test/live.test.ts",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=24.16.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.11.6"
+  },
+  "devDependencies": {
+    "openclaw": "2026.11.6",
+    "typescript": "^5.9.0",
+    "vitest": "^5.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "install": {
+      "npmSpec": "@clawifi/openclaw-search",
+      "clawhubSpec": "clawifi/openclaw-search",
+      "defaultChoice": "clawhub",
+      "minHostVersion": ">=2026.11.6"
+    },
+    "compat": {
+      "pluginApi": ">=2026.11.6",
+      "minGatewayVersion": ">=2026.11.6"
+    },
+    "build": {
+      "openclawVersion": "2026.11.6",
+      "pluginSdkVersion": "2026.11.6"
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
+    }
+  }
+}

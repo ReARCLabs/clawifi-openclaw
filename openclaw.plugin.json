@@ -1,0 +1,52 @@
+{
+  "id": "clawifi",
+  "name": "Clawifi",
+  "description": "Clawifi web search provider for OpenClaw. Works without an API key; a free key adds filters and more results.",
+  "categories": ["web"],
+  "activation": {
+    "onStartup": false
+  },
+  "setup": {
+    "providers": [
+      {
+        "id": "clawifi",
+        "authMethods": ["api-key"],
+        "envVars": ["CLAWIFI_API_KEY"]
+      }
+    ]
+  },
+  "uiHints": {
+    "webSearch.apiKey": {
+      "label": "Clawifi API Key (optional)",
+      "help": "Optional. Search works without a key (12 calls a minute, 50 a day, 3 results). A key (or the CLAWIFI_API_KEY env var) adds filters and up to 10 results at 1 credit a search. Free account: https://clawifi.dev/?utm_source=openclaw&utm_medium=integration&utm_campaign=clawhub-plugin",
+      "sensitive": true,
+      "placeholder": "clawifi_live_..."
+    }
+  },
+  "contracts": {
+    "webSearchProviders": ["clawifi"]
+  },
+  "configGroups": [
+    {
+      "id": "web-search",
+      "title": "Web search",
+      "order": 10,
+      "properties": ["webSearch"]
+    }
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "webSearch": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "apiKey": {
+            "type": ["string", "object"]
+          }
+        }
+      }
+    }
+  }
+}
