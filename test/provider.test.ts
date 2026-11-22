@@ -83,6 +83,11 @@ it("searches without a key through the MCP endpoint and wraps the results as unt
   expect(String(results[0]?.title)).toMatch(/EXTERNAL_UNTRUSTED_CONTENT/);
   expect(String(results[0]?.description)).toMatch(/EXTERNAL_UNTRUSTED_CONTENT/);
   expect(payload.notice).toBeUndefined();
+
+  // the default count (5) is above the keyless maximum, but nobody asked for 5: no notice
+  const byDefault = await tool().execute({ query: freshQuery("keyless default count") });
+  expect(byDefault).toMatchObject({ mode: "keyless", count: 3 });
+  expect(byDefault.notice).toBeUndefined();
 });
 
 it("says so when a keyless search could not apply filters or the asked count", async () => {

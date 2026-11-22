@@ -188,7 +188,8 @@ export async function executeClawifiSearch(
 
   const notices: string[] = [];
   if (outcome.mode === "keyless") {
-    if (count > CLAWIFI_KEYLESS_MAX_RESULTS) {
+    // Only when the caller asked for more: a default-count search carries no notice.
+    if (resolveSearchCount(args.count, 1) > CLAWIFI_KEYLESS_MAX_RESULTS) {
       notices.push(`Without an API key Clawifi returns at most ${CLAWIFI_KEYLESS_MAX_RESULTS} results.`);
     }
     if (ignoredFilters.length > 0) {

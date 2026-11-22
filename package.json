@@ -31,7 +31,7 @@
     "node": ">=24.16.0"
   },
   "peerDependencies": {
-    "openclaw": ">=2026.11.6"
+    "openclaw": ">=2026.9.2"
   },
   "devDependencies": {
     "openclaw": "2026.11.6",
@@ -49,11 +49,11 @@
       "npmSpec": "@clawifi/openclaw-search",
       "clawhubSpec": "clawifi/openclaw-search",
       "defaultChoice": "clawhub",
-      "minHostVersion": ">=2026.11.6"
+      "minHostVersion": ">=2026.9.2"
     },
     "compat": {
-      "pluginApi": ">=2026.11.6",
-      "minGatewayVersion": ">=2026.11.6"
+      "pluginApi": ">=2026.9.2",
+      "minGatewayVersion": "2026.9.2"
     },
     "build": {
       "openclawVersion": "2026.11.6",

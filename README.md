@@ -12,6 +12,8 @@ openclaw plugins install clawhub:clawifi/openclaw-search
 openclaw plugins install npm:@clawifi/openclaw-search
 ```
 
+OpenClaw asks you to accept the plugin's capabilities (it registers one web search provider); in a script, add `--accept-capabilities`.
+
 Then choose Clawifi as the search provider:
 
 ```bash
@@ -113,7 +115,7 @@ Result titles and snippets are wrapped as untrusted external content before the 
 
 ## Requirements
 
-OpenClaw 2026.11.6 or later.
+OpenClaw 2026.9.2 or later. Built and tested against 2026.11.6.
 
 ## Develop
 
