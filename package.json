@@ -63,5 +63,12 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReARCLabs/clawifi-openclaw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ReARCLabs/clawifi-openclaw/issues"
   }
 }
